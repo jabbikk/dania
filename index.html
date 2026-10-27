@@ -140,7 +140,7 @@
     break-inside: avoid;
     margin: 0 0 40px;
     transform: rotate(var(--r, 0deg));
-    transition: opacity .9s ease;
+    transition: opacity .5s ease;
   }
   .slot.out { opacity: 0; }
   .slot .frame { aspect-ratio: 3 / 4; }
@@ -369,8 +369,8 @@
     setTimeout(() => {
       fill(slot, take(poolOf(slot)));
       slot.classList.remove("out");
-    }, reduceMotion ? 0 : 900);
-  }, 3000);
+    }, reduceMotion ? 0 : 500);
+  }, 1300);
 
   // preload so a swap never shows an empty frame
   [...pools.tall.items, ...pools.land.items].forEach(src => { new Image().src = src; });
