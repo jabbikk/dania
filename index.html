@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Happy Birthday Dania</title>
+<meta name="description" content="For Dania, from all of us.">
+<meta property="og:title" content="Happy Birthday Dania">
+<meta property="og:description" content="For Dania, from all of us.">
+<meta property="og:image" content="media/river.jpg">
+<meta name="theme-color" content="#0c0a09">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800;900&family=Special+Elite&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0c0a09;
+    --ink-2: #151210;
+    --red: #c9252d;
+    --green: #0e6b3b;
+    --green-text: #3a9e66;
+    --paper: #ebe3d2;
+    --paper-dim: #a39a88;
+    --tape: rgba(235, 227, 210, .5);
+    --display: "Big Shoulders Display", Impact, "Arial Narrow", sans-serif;
+    --type: "Special Elite", "Courier New", monospace;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--type);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  img, video { display: block; max-width: 100%; }
+
+  /* faint photocopy grain */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 100;
+    opacity: .06;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; overflow: hidden;
+    clip: rect(0 0 0 0); white-space: nowrap;
+  }
+  :focus-visible { outline: 2px solid var(--green-text); outline-offset: 4px; }
+
+  /* a strip of tape on top of a print */
+  .taped::before {
+    content: "";
+    position: absolute;
+    top: -10px; left: 50%;
+    width: 70px; height: 20px;
+    transform: translateX(-50%) rotate(-2deg);
+    background: var(--tape);
+    z-index: 2;
+  }
+
+  /* a photo print: paper border, whole image visible */
+  .print {
+    position: relative;
+    background: var(--paper);
+    padding: 9px 9px 30px;
+    box-shadow: 0 10px 24px rgba(0,0,0,.5);
+  }
+  .print .frame { background: var(--paper); }
+  .print img { width: 100%; height: 100%; object-fit: contain; }
+
+  /* ---------- hero ---------- */
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    display: grid;
+    place-items: center;
+    padding: 80px 16px;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .hero-photos { position: absolute; inset: 0; z-index: -1; }
+  .hero-photos .print { position: absolute; width: clamp(130px, 17vw, 230px); opacity: .9; }
+  .hero-photos .frame { aspect-ratio: 3 / 4; }
+  .hero-photos .print:nth-child(1) { top: 8%;  left: 5%;  transform: rotate(-4deg); }
+  .hero-photos .print:nth-child(1) .frame { aspect-ratio: 4 / 3; }
+  .hero-photos .print:nth-child(2) { top: 6%;  right: 6%; transform: rotate(3deg); }
+  .hero-photos .print:nth-child(3) { bottom: 7%; left: 8%; transform: rotate(2deg); }
+  .hero-photos .print:nth-child(3) .frame { aspect-ratio: 4 / 3; }
+  .hero-photos .print:nth-child(4) { bottom: 8%; right: 5%; transform: rotate(-3deg); }
+
+  .hero-inner { text-align: center; width: 100%; max-width: 900px; }
+  .kicker {
+    margin: 0 0 1.2em;
+    font-size: clamp(.85rem, 1.6vw, 1rem);
+    letter-spacing: .14em;
+    color: var(--paper-dim);
+  }
+  .our-title {
+    margin: 0;
+    font-family: var(--display);
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: .86;
+    font-size: clamp(4.2rem, 15vw, 10rem);
+  }
+  .our { display: block; color: var(--paper); }
+  .word-slot { display: grid; min-height: 1.75em; align-items: start; }
+  .word {
+    display: block;
+    color: var(--red);
+    overflow-wrap: anywhere;
+    transition: opacity .8s ease;
+  }
+  .word.is-green { color: var(--green-text); }
+  .word.hidden { opacity: 0; }
+
+  /* ---------- collage ---------- */
+  .collage { padding: 40px 16px 96px; }
+  .board {
+    max-width: 1100px;
+    margin: 0 auto;
+    columns: 3;
+    column-gap: 36px;
+  }
+  .slot {
+    break-inside: avoid;
+    margin: 0 0 40px;
+    transform: rotate(var(--r, 0deg));
+    transition: opacity .9s ease;
+  }
+  .slot.out { opacity: 0; }
+  .slot .frame { aspect-ratio: 3 / 4; }
+  .slot.land .frame { aspect-ratio: 4 / 3; }
+
+  .slot.quote {
+    display: flex;
+    align-items: center;
+    min-height: 230px;
+    padding: 26px 24px;
+    background: var(--paper);
+    color: var(--ink);
+    box-shadow: 0 10px 24px rgba(0,0,0,.5);
+  }
+  .slot.quote.is-red   { background: var(--red); color: var(--ink); }
+  .slot.quote.is-green { background: var(--green); color: var(--paper); }
+  .slot.quote p { margin: 0; font-size: 1.15rem; line-height: 1.4; }
+  .slot.quote p.long { font-size: 1rem; }
+
+  /* ---------- highlights ---------- */
+  .highlights { padding: 72px 16px 96px; border-top: 1px solid #2a2522; }
+  .highlights h2 {
+    max-width: 1100px;
+    margin: 0 auto 36px;
+    font-family: var(--display);
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: clamp(2.4rem, 7vw, 4.2rem);
+    line-height: .9;
+  }
+  .highlights h2::after {
+    content: "";
+    display: block;
+    width: 48px; height: 4px;
+    margin-top: 14px;
+    background: var(--red);
+  }
+  .reel {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.55fr);
+    gap: 32px;
+    align-items: start;
+  }
+  .reel-side { display: grid; gap: 32px; }
+  .clip { margin: 0; }
+  .clip video { width: 100%; background: #000; border: 1px solid #2f2a26; }
+  .clip.main video { aspect-ratio: 9 / 16; max-height: 80svh; object-fit: cover; }
+  .clip figcaption { font-size: .9rem; color: var(--paper-dim); padding-top: 10px; }
+
+  /* ---------- footer ---------- */
+  footer { text-align: center; padding: 72px 16px 80px; border-top: 1px solid #2a2522; }
+  .bday {
+    margin: 0;
+    font-family: var(--display);
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: clamp(2.6rem, 9vw, 6rem);
+    line-height: .9;
+    color: var(--paper);
+  }
+  .bday span { color: var(--red); }
+  footer p { margin: 18px 0 0; color: var(--paper-dim); letter-spacing: .08em; }
+
+  /* ---------- smaller screens ---------- */
+  @media (max-width: 900px) {
+    .board { columns: 2; column-gap: 24px; }
+    .reel { grid-template-columns: 1fr; }
+    .clip.main video { max-height: 75svh; }
+  }
+  @media (max-width: 600px) {
+    .board { columns: 1; max-width: 420px; }
+    .slot.desk { display: none; }
+    .slot.quote { min-height: 190px; }
+    .hero-photos .print { width: 118px; opacity: .55; }
+    .hero-photos .print:nth-child(1) { top: 4%; left: -8px; }
+    .hero-photos .print:nth-child(2) { top: 3%; right: -8px; }
+    .hero-photos .print:nth-child(3) { bottom: 5%; left: -6px; }
+    .hero-photos .print:nth-child(4) { bottom: 4%; right: -10px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .word, .slot { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-photos" aria-hidden="true">
+    <div class="print taped"><div class="frame"><img src="media/river.jpg" alt=""></div></div>
+    <div class="print taped"><div class="frame"><img src="media/stage.jpg" alt=""></div></div>
+    <div class="print"><div class="frame"><img src="media/hug.jpg" alt=""></div></div>
+    <div class="print taped"><div class="frame"><img src="media/cafe.jpg" alt=""></div></div>
+  </div>
+
+  <div class="hero-inner">
+    <p class="kicker">happy birthday, dania</p>
+    <h1 class="our-title">
+      <span class="our">Our</span>
+      <span class="word-slot" aria-hidden="true"><span class="word" id="word">Goat</span></span>
+      <span class="sr-only">Our goat, queen, star, deadasshole, foundation, musical genius, prankster, and welcoming presence.</span>
+    </h1>
+  </div>
+</header>
+
+<section class="collage" aria-label="Photos and notes from friends">
+  <div class="board" id="board">
+    <div class="slot print" data-pool="tall" style="--r:-1.5deg"><div class="frame"></div></div>
+    <div class="slot quote" style="--r:1deg"></div>
+    <div class="slot print land" data-pool="land" style="--r:1.5deg"><div class="frame"></div></div>
+    <div class="slot print land" data-pool="land" style="--r:-1deg"><div class="frame"></div></div>
+    <div class="slot quote is-green" style="--r:-1deg"></div>
+    <div class="slot print desk" data-pool="tall" style="--r:1deg"><div class="frame"></div></div>
+    <div class="slot print" data-pool="tall" style="--r:1.5deg"><div class="frame"></div></div>
+    <div class="slot quote is-red desk" style="--r:-.5deg"></div>
+    <div class="slot print land desk" data-pool="land" style="--r:-1.5deg"><div class="frame"></div></div>
+  </div>
+</section>
+
+<section class="highlights">
+  <h2>Some highlights</h2>
+  <div class="reel">
+    <figure class="clip main">
+      <video controls playsinline preload="metadata" poster="media/mosh-poster.jpg">
+        <source src="media/mosh.mp4" type="video/mp4">
+      </video>
+      <figcaption>in the pit</figcaption>
+    </figure>
+    <div class="reel-side">
+      <figure class="clip">
+        <video controls playsinline preload="metadata" poster="media/mine1-poster.jpg">
+          <source src="media/mine1.mp4" type="video/mp4">
+        </video>
+        <figcaption>days played: 84</figcaption>
+      </figure>
+      <figure class="clip">
+        <video controls playsinline preload="metadata" poster="media/mine2-poster.jpg">
+          <source src="media/mine2.mp4" type="video/mp4">
+        </video>
+        <figcaption>days played: 89</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <h2 class="bday">Happy birthday, <span>Dania</span></h2>
+  <p>love, all of us</p>
+</footer>
+
+<script>
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---- "Our ____": quiet crossfade ---- */
+  const words = ["Goat", "Queen", "Star", "Deadasshole", "Foundation", "Musical Genius", "Prankster", "Welcoming Presence"];
+  const wordEl = document.getElementById("word");
+  let wi = 0;
+
+  setInterval(() => {
+    wordEl.classList.add("hidden");
+    setTimeout(() => {
+      wi = (wi + 1) % words.length;
+      wordEl.textContent = words[wi];
+      wordEl.classList.toggle("is-green", wi % 3 === 2);
+      wordEl.classList.remove("hidden");
+    }, reduceMotion ? 0 : 800);
+  }, 3200);
+
+  /* ---- collage: photos and quotes swap one at a time ---- */
+  const quotes = [
+    "my fricking fracking goat. never change or apologize",
+    "my queen has a soul that makes the world feel lighter",
+    "Deadasshole.",
+    "Dania is a foundation of support in all our lives, and has a welcoming presence whenever she’s around",
+    "Dear DMB, thanks for always having positive energy and being an amazing mind creatively and lovingly. Can’t wait to see you become a star. Love ya",
+    "The laughs we have, between me and you. Pranks, laughs, augh!"
+  ];
+  const media = n => `media/${n}.jpg`;
+  const pools = {
+    quote: { items: quotes, next: 0 },
+    tall:  { items: ["monkey", "selfie2", "stickerwall", "redshirt", "stage", "cafe", "selfie1"].map(media), next: 0 },
+    land:  { items: ["carkiss", "crew", "nightout", "lifted", "river", "closeup", "carroof", "hug"].map(media), next: 0 }
+  };
+
+  const slots = [...document.querySelectorAll("#board .slot")];
+  const poolOf = s => s.dataset.pool || "quote";
+  const visible = () => slots.filter(s => s.offsetParent !== null);
+
+  function fill(slot, value) {
+    slot.dataset.item = value;
+    if (poolOf(slot) === "quote") {
+      const p = document.createElement("p");
+      p.textContent = value;
+      if (value.length > 110) p.className = "long";
+      slot.replaceChildren(p);
+    } else {
+      const img = document.createElement("img");
+      img.src = value;
+      img.alt = "Dania";
+      slot.querySelector(".frame").replaceChildren(img);
+    }
+  }
+
+  function take(kind) {
+    const pool = pools[kind];
+    const onBoard = new Set(visible().filter(s => poolOf(s) === kind).map(s => s.dataset.item));
+    for (let i = 0; i < pool.items.length; i++) {
+      const v = pool.items[pool.next];
+      pool.next = (pool.next + 1) % pool.items.length;
+      if (!onBoard.has(v)) return v;
+    }
+    return pool.items[pool.next];
+  }
+
+  // fill what's on screen first so phones see the first quotes right away
+  [...visible(), ...slots.filter(s => s.offsetParent === null)].forEach(s => fill(s, take(poolOf(s))));
+
+  let last = null;
+  setInterval(() => {
+    const options = visible().filter(s => s !== last);
+    const slot = options[Math.floor(Math.random() * options.length)];
+    last = slot;
+    slot.classList.add("out");
+    setTimeout(() => {
+      fill(slot, take(poolOf(slot)));
+      slot.classList.remove("out");
+    }, reduceMotion ? 0 : 900);
+  }, 3000);
+
+  // preload so a swap never shows an empty frame
+  [...pools.tall.items, ...pools.land.items].forEach(src => { new Image().src = src; });
+
+  /* ---- only one video plays at a time ---- */
+  const vids = [...document.querySelectorAll("video")];
+  vids.forEach(v => v.addEventListener("play", () => vids.forEach(o => o !== v && o.pause())));
+</script>
+</body>
+</html>
